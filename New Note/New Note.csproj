@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Misc\Fonts\JosefinSans-Bold.ttf" />
+    <None Remove="Misc\Fonts\JosefinSans-Regular.ttf" />
+    <None Remove="Misc\Fonts\JosefinSans-SemiBold.ttf" />
+    <None Remove="Misc\Fonts\Poppins-Medium.otf" />
+    <None Remove="Misc\Fonts\Poppins-Regular.otf" />
+    <None Remove="Misc\Fonts\Poppins-SemiBold.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Misc\Fonts\JosefinSans-Bold.ttf" />
+    <EmbeddedResource Include="Misc\Fonts\JosefinSans-Regular.ttf" />
+    <EmbeddedResource Include="Misc\Fonts\JosefinSans-SemiBold.ttf" />
+    <EmbeddedResource Include="Misc\Fonts\Poppins-Medium.otf" />
+    <EmbeddedResource Include="Misc\Fonts\Poppins-Regular.otf" />
+    <EmbeddedResource Include="Misc\Fonts\Poppins-SemiBold.otf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\AddNewNote.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\EditNotePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\NotesListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\ViewNote.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

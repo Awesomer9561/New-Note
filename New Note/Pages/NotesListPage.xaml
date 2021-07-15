@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="New_Note.Pages.NotesListPage"
+             BackgroundColor="#272727"
+             NavigationPage.HasNavigationBar="False">
+
+
+
+
+    <ContentPage.Content>
+        <StackLayout>
+            <!--Header-->
+            <Grid Margin="30,15,30,0" RowDefinitions="55">
+                <Label Text="Notes" FontSize="50" FontFamily="PMed" 
+                       VerticalOptions="Start" TextColor="White"/>
+                <Frame Grid.Column="1" HorizontalOptions="End" Padding="0" WidthRequest="55"
+                       Style="{StaticResource ButtonFrame}">
+                    <ImageButton Source="search" HeightRequest="20" Clicked="search" 
+                                 BackgroundColor="Transparent"
+                                 VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="search"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+            <AbsoluteLayout>
+                <CollectionView x:Name="noteCollectionView" Margin="15,05,15,0"
+                            ItemSizingStrategy="MeasureAllItems" SelectionMode="Single" SelectionChanged="noteSelected">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2"  
+                                     VerticalItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame WidthRequest="200" Margin="10,0" x:Name="BoxFrame" 
+                                   CornerRadius="15" Padding="10" BackgroundColor="{Binding NoteColor}">
+                                    <StackLayout>
+                                        <Label Text="{Binding Title}" x:Name="TitleViewLabel"
+                                           FontSize="23" FontFamily="PMed"/>
+                                        <Label Text="{Binding TimeStamp}" x:Name="TimeStampLabel"
+                                           FontSize="Caption"/>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+
+                    <CollectionView.EmptyView>
+                        <ContentPage>
+                            <StackLayout>
+                                <Label Text="No notes here!" FontSize="Title" FontFamily="PReg" TextColor="WhiteSmoke"/>
+                                <Label Text="Try adding some" FontSize="Body" FontFamily="JFReg" TextColor="WhiteSmoke"/>
+                            </StackLayout>
+                        </ContentPage>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+
+                <ImageButton Source="add" BackgroundColor="Transparent" HeightRequest="20"
+            AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95,.97,50,50" 
+            Clicked="addNote"/>
+            </AbsoluteLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

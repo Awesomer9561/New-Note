@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="New_Note.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="ButtonFrame">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="BackgroundColor" Value="#57606f"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

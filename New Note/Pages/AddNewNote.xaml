@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="New_Note.Pages.AddNewNote" 
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="	#272727"
+             xmlns:custom="clr-namespace:New_Note.Misc">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid RowDefinitions="50" 
+                  ColumnDefinitions="*,*" Margin="30,30,30,0">
+                <!--Back-->
+                <Frame Style="{StaticResource ButtonFrame}" HorizontalOptions="Start" 
+                       Padding="0" WidthRequest="50">
+                    <Image Source="back" HeightRequest="20" Margin="0,0,3,0"
+                                 HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="back"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <!--Save-->
+                <Frame Style="{StaticResource ButtonFrame}" Padding="20,0"
+                       Grid.Column="1" HorizontalOptions="End" WidthRequest="60">
+                    <Label Text="Save" FontSize="25" TextColor="White" Margin="0,5,0,0"
+                           HorizontalOptions="Center" VerticalOptions="Center" FontFamily="PReg"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="saveNote"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <StackLayout Margin="30,0">
+                <!--Title-->
+                <custom:MyEntry FontSize="40" Placeholder="Title" Margin="0,30" x:Name="TitleEntry"
+                       PlaceholderColor="WhiteSmoke" TextColor="WhiteSmoke"
+                       FontFamily="PMed" CharacterSpacing="0.5"/>
+
+                <!--Note-->
+                <custom:MyEditor Placeholder="Type something..." FontSize="20" AutoSize="TextChanges"
+                                 x:Name="NoteEditor"
+                    FontFamily="PReg" PlaceholderColor="WhiteSmoke" TextColor="WhiteSmoke"/>
+
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
