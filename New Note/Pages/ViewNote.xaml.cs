@@ -31,7 +31,7 @@ namespace New_Note.Pages
             var button = sender as ImageButton;
             var note = button.BindingContext as ModelTable;
 
-            App.Database.DeleteNote(note);
+            App.DatabaseLayer.DeleteNote(note);
             Navigation.PopAsync();
         }
 

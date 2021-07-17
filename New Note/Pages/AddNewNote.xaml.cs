@@ -12,7 +12,7 @@ namespace New_Note.Pages
         {
             InitializeComponent();
         }
-        Random r = new Random();
+        readonly Random r = new Random();
         private void back(object sender, EventArgs e)
         {
             Navigation.PopAsync();
@@ -36,7 +36,7 @@ namespace New_Note.Pages
                     NoteColor = bgcolor
                 };
 
-                App.Database.SaveNote(noteItem);
+                App.DatabaseLayer.SaveNote(noteItem);
 
                 await DisplayAlert("Success", "Item Added Successfully", "Ok");
                 await Navigation.PopAsync();

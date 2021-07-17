@@ -7,57 +7,51 @@ using System.Threading.Tasks;
 
 namespace New_Note
 {
-    public class DatabaseLayer
+    public class Database
     {
-        //Acting as an interface betweeen app and the Database
         static Lazy<SQLiteAsyncConnection> lazy = new Lazy<SQLiteAsyncConnection>(() =>
         {
             return new SQLiteAsyncConnection(Constants.DBPath, Constants.Flags);
         });
-
         //Instantiating the Database
-        public SQLiteAsyncConnection SQLiteDatabase = lazy.Value;
+        public SQLiteAsyncConnection SQLiteAsync = lazy.Value;
 
 
-
-        //Database functions
-        public void CreateNoteTable()
+        //Create table
+        public void Createtable()
         {
-            if (!SQLiteDatabase.TableMappings.Any(m => m.TableName == typeof(ModelTable).Name))
+            if (!SQLiteAsync.TableMappings.Any(m => m.TableName == typeof(ModelTable).Name))
             {
-                SQLiteDatabase.CreateTableAsync<ModelTable>();
+                SQLiteAsync.CreateTableAsync<ModelTable>();
             }
         }
 
-        public Task<List<ModelTable>> GetNote()
+        //Read table
+        public Task<List<ModelTable>> ReadNote()
         {
-            return SQLiteDatabase.Table<ModelTable>().ToListAsync();
+            return SQLiteAsync.Table<ModelTable>().ToListAsync();
         }
 
+        //Update/Save table
         public void SaveNote(ModelTable note)
         {
             if (note.ID == 0)
-            {
-                SQLiteDatabase.InsertAsync(note);
-            }
+                SQLiteAsync.InsertAsync(note);
             else
-            {
-                SQLiteDatabase.UpdateAsync(note);
-            }
+                SQLiteAsync.UpdateAsync(note);
         }
 
+        //Delete note
         public void DeleteNote(ModelTable note)
         {
-            SQLiteDatabase.DeleteAsync(note);
+            SQLiteAsync.DeleteAsync(note);
         }
-
-
     }
 
-    //Constant class no need to create another class
+    //Constants class
     public static class Constants
     {
-        public const string DatabaseFilename = "NotesDB.db3";
+        public const string DatabaseFilename = "NoteDataBase.db3";
         public const SQLite.SQLiteOpenFlags Flags =
        // open the database in read/write mode
        SQLite.SQLiteOpenFlags.ReadWrite |

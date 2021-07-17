@@ -11,26 +11,24 @@ namespace New_Note.Pages
     public partial class NotesListPage : ContentPage
     {
         ObservableCollection<ModelTable> noteItem { get; set; }
+        ObservableCollection<tempCollectionClass> note2 { get; set; }
+        Random r = new Random();
         public NotesListPage()
         {
             InitializeComponent();
-            App.Database.CreateNoteTable();
-
-            OnAppearingMethod();
+            
         }
+        
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            OnAppearingMethod();
-        }
-        private void OnAppearingMethod()
-        {
-            var NoteDBInstance = App.Database.GetNote().Result;
-            if(NoteDBInstance != null)
+            var notedb = App.DatabaseLayer.ReadNote().Result;
+            if (notedb != null)
             {
-                noteItem = new ObservableCollection<ModelTable>(NoteDBInstance);
+                noteItem = new ObservableCollection<ModelTable>(notedb);
+                noteCollectionView.ItemsSource = noteItem;
             }
-            noteCollectionView.ItemsSource = noteItem;
         }
 
         private void search(object sender, EventArgs e)

@@ -33,7 +33,7 @@ namespace New_Note.Pages
             note.Title = TitleViewLabel.Text;
             note.TimeStamp = DateTime.Now.ToString();
 
-            App.Database.SaveNote(note);
+            App.DatabaseLayer.SaveNote(note);
         }
     }
 }

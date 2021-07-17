@@ -6,14 +6,14 @@ namespace New_Note
 {
     public partial class App : Application
     {
-        public static DatabaseLayer database;
-        public static DatabaseLayer Database
+        public static Database database;
+        public static Database DatabaseLayer
         {
             get
             {
                 if (database == null)
                 {
-                    database = new DatabaseLayer();
+                    database = new Database();
                 }
                 return database;
             }
@@ -23,7 +23,9 @@ namespace New_Note
         {
             InitializeComponent();
 
+            DatabaseLayer.Createtable();
             MainPage = new NavigationPage(new Pages.NotesListPage());
+
         }
 
         protected override void OnStart()
