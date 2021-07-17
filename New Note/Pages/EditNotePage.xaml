@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="New_Note.Pages.EditNotePage">
+             x:Class="New_Note.Pages.EditNotePage"
+             BackgroundColor="	#272727"
+             xmlns:custom="clr-namespace:New_Note.Misc"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
             <Grid ColumnDefinitions="*,*" RowDefinitions="55" Margin="30,30,30,0">
@@ -15,26 +18,20 @@
                     </Frame.GestureRecognizers>
                 </Frame>
 
-                <Frame Grid.Column="1" HorizontalOptions="End" Padding="0" WidthRequest="55"
-                       Style="{StaticResource ButtonFrame}">
-                    <ImageButton Source="tick" HeightRequest="20" Clicked="saveNote" 
-                                 BackgroundColor="Transparent" Margin="0,0,2,0"
-                                 VerticalOptions="Center" HorizontalOptions="Center"/>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="saveNote"/>
-                    </Frame.GestureRecognizers>
-                </Frame>
+                <ImageButton Source="tick" HeightRequest="40" Clicked="saveNote" Grid.Column="1" 
+                                 BackgroundColor="Transparent" Margin="0,0,2,0" 
+                                 VerticalOptions="Center" HorizontalOptions="End"/>
             </Grid>
 
 
             <StackLayout Margin="30,0">
-                <Ellipse x:Name="colorBox" StrokeThickness="4" Margin="0,30,3,0"
-                         WidthRequest="30" HeightRequest="30" HorizontalOptions="End" />
-                <Editor x:Name="TitleViewLabel" Margin="0,10,0,0"
+                <Frame x:Name="colorBox" Margin="0,30,3,0" CornerRadius="40" Padding="0"
+                         WidthRequest="40" HeightRequest="40" HorizontalOptions="End" />
+                <custom:MyEditor x:Name="TitleViewLabel" Margin="0,-30,0,0" AutoSize="TextChanges"
                                            FontSize="30" FontFamily="PMed" TextColor="WhiteSmoke"/>
                 <Label x:Name="TimeStampLabel" Margin="0,15,0,25"
                                            FontSize="17" FontFamily="JFReg" TextColor="WhiteSmoke"/>
-                <Editor x:Name="NoteViewLabel" AutoSize="TextChanges"
+                <custom:MyEditor x:Name="NoteViewLabel" AutoSize="TextChanges"
                                            FontSize="20" FontFamily="PReg" TextColor="WhiteSmoke"/>
             </StackLayout>
         </StackLayout>

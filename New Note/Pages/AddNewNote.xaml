@@ -32,13 +32,13 @@
             <StackLayout Margin="30,0">
                 <!--Title-->
                 <custom:MyEntry FontSize="40" Placeholder="Title" Margin="0,30" x:Name="TitleEntry"
-                       PlaceholderColor="WhiteSmoke" TextColor="WhiteSmoke"
+                       PlaceholderColor="#636e72" TextColor="WhiteSmoke" Completed="titleCompleted"
                        FontFamily="PMed" CharacterSpacing="0.5"/>
 
                 <!--Note-->
                 <custom:MyEditor Placeholder="Type something..." FontSize="20" AutoSize="TextChanges"
                                  x:Name="NoteEditor"
-                    FontFamily="PReg" PlaceholderColor="WhiteSmoke" TextColor="WhiteSmoke"/>
+                    FontFamily="PReg" PlaceholderColor="#636e72" TextColor="WhiteSmoke"/>
 
             </StackLayout>
 

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,13 +8,23 @@ namespace New_Note.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewNote : ContentPage
     {
-        public ViewNote(ModelTable note)
+        Table2 note2 = new Table2();
+        public ViewNote(Table2 note)
         {
             InitializeComponent();
             NoteViewLabel.Text = note.NoteItem;
             TitleViewLabel.Text = note.Title;
             TimeStampLabel.Text = note.TimeStamp;
-            colorBox.BackgroundColor = note.NoteColor;
+            colorBox.BackgroundColor = Color.FromHex(note.NoteColor);
+            note2.ID = note.ID;
+        }
+
+        private void createNote()
+        {
+            note2.NoteItem = NoteViewLabel.Text;
+            note2.Title = TitleViewLabel.Text;
+            note2.TimeStamp = DateTime.Now.ToString("d MMMM, yyyy");
+            note2.NoteColor = colorBox.BackgroundColor.ToHex();
         }
 
         private void back(object sender, EventArgs e)
@@ -28,19 +34,16 @@ namespace New_Note.Pages
 
         private void deleteNote(object sender, EventArgs e)
         {
-            var button = sender as ImageButton;
-            var note = button.BindingContext as ModelTable;
-
-            App.DatabaseLayer.DeleteNote(note);
+            createNote();
+            App.DatabaseLayer.DeleteNote(note2);
             Navigation.PopAsync();
         }
 
-
+        
         private void editNote(object sender, EventArgs e)
         {
-            var button = sender as ImageButton;
-            var note = button.BindingContext as ModelTable;
-            Navigation.PushAsync(new EditNotePage(note));
+            createNote();
+            Navigation.PushAsync(new EditNotePage(note2));
         }
     }
 }

@@ -20,20 +20,20 @@ namespace New_Note
         //Create table
         public void Createtable()
         {
-            if (!SQLiteAsync.TableMappings.Any(m => m.TableName == typeof(ModelTable).Name))
+            if (!SQLiteAsync.TableMappings.Any(m => m.TableName == typeof(Table2).Name))
             {
-                SQLiteAsync.CreateTableAsync<ModelTable>();
+                SQLiteAsync.CreateTableAsync<Table2>();
             }
         }
 
         //Read table
-        public Task<List<ModelTable>> ReadNote()
+        public Task<List<Table2>> ReadNote()
         {
-            return SQLiteAsync.Table<ModelTable>().ToListAsync();
+            return SQLiteAsync.Table<Table2>().ToListAsync();
         }
 
         //Update/Save table
-        public void SaveNote(ModelTable note)
+        public void SaveNote(Table2 note)
         {
             if (note.ID == 0)
                 SQLiteAsync.InsertAsync(note);
@@ -42,7 +42,7 @@ namespace New_Note
         }
 
         //Delete note
-        public void DeleteNote(ModelTable note)
+        public void DeleteNote(Table2 note)
         {
             SQLiteAsync.DeleteAsync(note);
         }
@@ -51,7 +51,7 @@ namespace New_Note
     //Constants class
     public static class Constants
     {
-        public const string DatabaseFilename = "NoteDataBase.db3";
+        public const string DatabaseFilename = "NoteDB.db3";
         public const SQLite.SQLiteOpenFlags Flags =
        // open the database in read/write mode
        SQLite.SQLiteOpenFlags.ReadWrite |

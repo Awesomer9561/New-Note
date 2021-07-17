@@ -12,13 +12,13 @@ namespace New_Note.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditNotePage : ContentPage
     {
-        public EditNotePage(ModelTable note)
+        public EditNotePage(Table2 note)
         {
             InitializeComponent();
             NoteViewLabel.Text = note.NoteItem;
             TitleViewLabel.Text = note.Title;
             TimeStampLabel.Text = note.TimeStamp;
-            colorBox.BackgroundColor = note.NoteColor;
+            colorBox.BackgroundColor = Color.FromHex(note.NoteColor);
         }
 
         private void back(object sender, EventArgs e)
@@ -26,14 +26,15 @@ namespace New_Note.Pages
             Navigation.PopToRootAsync();
         }
 
-        private void saveNote(object sender, EventArgs e)
+        private async void saveNote(object sender, EventArgs e)
         {
-            ModelTable note = new ModelTable();
+            Table2 note = new Table2();
             note.NoteItem = NoteViewLabel.Text;
             note.Title = TitleViewLabel.Text;
             note.TimeStamp = DateTime.Now.ToString();
 
             App.DatabaseLayer.SaveNote(note);
+            await Navigation.PopAsync();
         }
     }
 }

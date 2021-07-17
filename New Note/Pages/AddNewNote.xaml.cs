@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Xamarin.CommunityToolkit.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +12,12 @@ namespace New_Note.Pages
         {
             InitializeComponent();
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            //TitleEntry.Focus();
+
+        }
         readonly Random r = new Random();
         private void back(object sender, EventArgs e)
         {
@@ -22,29 +28,33 @@ namespace New_Note.Pages
         {
             string title = TitleEntry.Text;
             string note = NoteEditor.Text;
-            string timeStamp = DateTime.Now.ToString("d MMMM, yyyy");
-            var bgcolor = Color.FromRgba(r.Next(100, 256), r.Next(100, 256), r.Next(100, 256), 200);
+            string timeStamp = DateTime.Now.ToString("ddd d MMMM, yyyy");
+            string bgColor = Color.FromHsv(r.Next(0,250) , 70 , 89 ).ToHex();
 
             //if not empty
             if (string.IsNullOrEmpty(title)|| string.IsNullOrEmpty(note) == false)
             {
-                ModelTable noteItem = new ModelTable()
+                Table2 noteItem = new Table2()
                 {
                     Title = title,
                     NoteItem = note,
                     TimeStamp = timeStamp,
-                    NoteColor = bgcolor
+                    NoteColor = bgColor
                 };
 
                 App.DatabaseLayer.SaveNote(noteItem);
-
-                await DisplayAlert("Success", "Item Added Successfully", "Ok");
+                Application.Current.MainPage.DisplayToastAsync("Item Added Successfully");
                 await Navigation.PopAsync();
             }
             else
             {
                 await DisplayAlert("Error", "Please Write Something", "Ok");
             }
+        }
+
+        private void titleCompleted(object sender, EventArgs e)
+        {
+            NoteEditor.Focus();
         }
     }
 }

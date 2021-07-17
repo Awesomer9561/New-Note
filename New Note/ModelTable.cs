@@ -4,12 +4,13 @@ using Xamarin.Forms;
 
 namespace New_Note
 {
-    public class ModelTable
+    public class Table2
     {
         [PrimaryKey, AutoIncrement] public int ID { get; set; }
-        public String Title { get; set; }
-        public String NoteItem { get; set; }
-        public String TimeStamp { get; set; }
-        public Color NoteColor { get; set; }
+        public string Title { get; set; }
+        public string NoteItem { get; set; }
+        public string TimeStamp { get; set; }
+        public string NoteColor { get; set; }
+
     }
 }

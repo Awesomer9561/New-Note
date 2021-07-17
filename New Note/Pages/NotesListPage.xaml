@@ -5,7 +5,29 @@
              BackgroundColor="#272727"
              NavigationPage.HasNavigationBar="False">
 
-
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
 
 
     <ContentPage.Content>
@@ -34,7 +56,7 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
+                            <Grid>
                                 <Frame WidthRequest="200" Margin="10,0" x:Name="BoxFrame" 
                                    CornerRadius="15" Padding="10" BackgroundColor="{Binding NoteColor}">
                                     <StackLayout>
@@ -44,18 +66,21 @@
                                            FontSize="Caption"/>
                                     </StackLayout>
                                 </Frame>
-                            </StackLayout>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
 
-
                     <CollectionView.EmptyView>
-                        <ContentPage>
-                            <StackLayout>
-                                <Label Text="No notes here!" FontSize="Title" FontFamily="PReg" TextColor="WhiteSmoke"/>
-                                <Label Text="Try adding some" FontSize="Body" FontFamily="JFReg" TextColor="WhiteSmoke"/>
+                        <ContentView>
+                            <StackLayout HorizontalOptions="CenterAndExpand"
+                             VerticalOptions="CenterAndExpand">
+                                <Label Text="You don't have any notes." FontAttributes="Bold" FontSize="17" 
+                                       FontFamily="JFReg" TextColor="WhiteSmoke" Margin="0,-50,0,0"
+                                       HorizontalTextAlignment="Center" />
+                                <Label Text="Try adding some!" FontAttributes="Italic" TextColor="WhiteSmoke" FontFamily="JFReg" 
+                                       FontSize="25" HorizontalOptions="Fill" HorizontalTextAlignment="Center" />
                             </StackLayout>
-                        </ContentPage>
+                        </ContentView>
                     </CollectionView.EmptyView>
                 </CollectionView>
 

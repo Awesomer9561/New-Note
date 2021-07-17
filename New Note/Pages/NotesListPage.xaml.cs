@@ -10,25 +10,25 @@ namespace New_Note.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotesListPage : ContentPage
     {
-        ObservableCollection<ModelTable> noteItem { get; set; }
-        ObservableCollection<tempCollectionClass> note2 { get; set; }
+        public ObservableCollection<Table2> noteItem { get; set; }
         Random r = new Random();
         public NotesListPage()
         {
             InitializeComponent();
-            
         }
-        
+
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            App.DatabaseLayer.Createtable();
             var notedb = App.DatabaseLayer.ReadNote().Result;
             if (notedb != null)
             {
-                noteItem = new ObservableCollection<ModelTable>(notedb);
+                noteItem = new ObservableCollection<Table2>(notedb);
                 noteCollectionView.ItemsSource = noteItem;
             }
+            
         }
 
         private void search(object sender, EventArgs e)
@@ -44,8 +44,8 @@ namespace New_Note.Pages
         private void noteSelected(object sender, SelectionChangedEventArgs e)
         {
             var prevnote = e.PreviousSelection;
-            var currnote = e.CurrentSelection.FirstOrDefault() as ModelTable;
-            
+            var currnote = e.CurrentSelection.FirstOrDefault() as Table2;
+
             Navigation.PushAsync(new Pages.ViewNote(currnote));
         }
     }
