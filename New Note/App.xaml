@@ -10,6 +10,11 @@
                 <Setter Property="CornerRadius" Value="15"/>
                 <Setter Property="BackgroundColor" Value="#57606f"/>
             </Style>
+            <Style TargetType="Label" x:Key="Popup">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="PReg"/>
+                <Setter Property="TextColor" Value="#485460"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -25,7 +25,7 @@ namespace New_Note
 
             DatabaseLayer.Createtable();
             MainPage = new NavigationPage(new Pages.NotesListPage());
-
+            //MainPage = new NavigationPage(new Misc.DisplayAlertPopup());
         }
 
         protected override void OnStart()
