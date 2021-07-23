@@ -61,7 +61,7 @@ namespace New_Note.Pages
             //string bgColor = Color.FromHsv(r.Next(0,250) , 70 , 89 ).ToHex();
             string bgColor = colors[r.Next(0, 19)];
             //if not empty
-            if (string.IsNullOrEmpty(title)== false || string.IsNullOrEmpty(note) == false)
+            if (string.IsNullOrEmpty(title)== false && string.IsNullOrEmpty(note) == false)
             {
                 Table2 noteItem = new Table2()
                 {

@@ -9,22 +9,23 @@ namespace New_Note.Pages
     public partial class ViewNote : ContentPage
     {
         Table2 note2 = new Table2();
+        Table2 note1 = new Table2();
         public ViewNote(Table2 note)
         {
             InitializeComponent();
-            NoteViewLabel.Text = note.NoteItem;
-            TitleViewLabel.Text = note.Title;
-            TimeStampLabel.Text = note.TimeStamp;
-            colorBox.BackgroundColor = Color.FromHex(note.NoteColor);
-            note2.ID = note.ID;
-        }
+            note1 = note;
+            note2 = note;
 
-        private void createNote()
+            OnAppearing();
+        }
+        protected override void OnAppearing()
         {
-            note2.NoteItem = NoteViewLabel.Text;
-            note2.Title = TitleViewLabel.Text;
-            note2.TimeStamp = DateTime.Now.ToString("d MMMM, yyyy");
-            note2.NoteColor = colorBox.BackgroundColor.ToHex();
+            base.OnAppearing();
+            
+            NoteViewLabel.Text = note1.NoteItem;
+            TitleViewLabel.Text = note1.Title;
+            TimeStampLabel.Text = note1.TimeStamp;
+            colorBox.BackgroundColor = Color.FromHex(note1.NoteColor);
         }
 
         private void back(object sender, EventArgs e)
@@ -34,7 +35,6 @@ namespace New_Note.Pages
 
         private void deleteNote(object sender, EventArgs e)
         {
-            createNote();
             App.DatabaseLayer.DeleteNote(note2);
             Navigation.PopAsync();
         }
@@ -42,7 +42,6 @@ namespace New_Note.Pages
         
         private void editNote(object sender, EventArgs e)
         {
-            createNote();
             Navigation.PushAsync(new EditNotePage(note2));
         }
     }

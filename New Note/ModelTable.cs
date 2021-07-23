@@ -1,6 +1,4 @@
 ﻿using SQLite;
-using System;
-using Xamarin.Forms;
 
 namespace New_Note
 {
