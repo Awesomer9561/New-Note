@@ -33,11 +33,11 @@
     <ContentPage.Content>
         <StackLayout>
             <!--Header-->
-            <Grid Margin="30,15,30,15" RowDefinitions="55">
+            <Grid Margin="30,15,10,15" RowDefinitions="55" ColumnDefinitions="*,auto,auto">
                 <Label Text="Notes" FontSize="50" FontFamily="PMed" 
                        VerticalOptions="Start" TextColor="White"/>
                 <Frame Grid.Column="1" HorizontalOptions="End" Padding="0" WidthRequest="55"
-                       Style="{StaticResource ButtonFrame}">
+                       Style="{StaticResource ButtonFrame}" Margin="5,0">
                     <ImageButton Source="search" HeightRequest="20" Clicked="search" 
                                  BackgroundColor="Transparent"
                                  VerticalOptions="Center" HorizontalOptions="Center"/>
@@ -45,6 +45,16 @@
                         <TapGestureRecognizer Tapped="search"/>
                     </Frame.GestureRecognizers>
                 </Frame>
+
+                <!--Profile-->
+                <Frame Grid.Column="2" HorizontalOptions="End" Padding="0" WidthRequest="55"
+                       Style="{StaticResource ButtonFrame}" Margin="5,0" CornerRadius="55" BackgroundColor="Green">
+                    <Label Text="PA" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="profile"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
             </Grid>
             <AbsoluteLayout>
                 <CollectionView x:Name="noteCollectionView" Margin="15,05,15,0"
@@ -87,7 +97,7 @@
                 </CollectionView>
 
                 <ImageButton Source="add" BackgroundColor="Transparent" HeightRequest="20"
-            AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95,.97,50,50" 
+            AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95,.92,60,60" 
             Clicked="addNote"/>
             </AbsoluteLayout>
             

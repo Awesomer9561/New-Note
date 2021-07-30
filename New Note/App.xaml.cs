@@ -24,7 +24,10 @@ namespace New_Note
             InitializeComponent();
 
             DatabaseLayer.Createtable();
-            MainPage = new NavigationPage(new Pages.NotesListPage());
+            //MainPage = new NavigationPage(new Pages.NotesListPage());
+            //MainPage = new NavigationPage(new Pages.ProfilePageNew());
+            MainPage = new NavigationPage(new Pages.LoginPages.LoginPage());
+            //MainPage = new NavigationPage(new Pages.SearchNotePage());
             //MainPage = new NavigationPage(new Misc.DisplayAlertPopup());
         }
 

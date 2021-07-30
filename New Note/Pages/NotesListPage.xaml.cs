@@ -59,7 +59,7 @@ namespace New_Note.Pages
 
         private void search(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new Pages.SearchNotePage());
         }
 
         private void addNote(object sender, EventArgs e)
@@ -73,6 +73,11 @@ namespace New_Note.Pages
             var currnote = e.CurrentSelection.FirstOrDefault() as Table2;
 
             Navigation.PushAsync(new Pages.ViewNote(currnote));
+        }
+
+        private void profile(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new Pages.ProfilePageNew());
         }
     }
 }

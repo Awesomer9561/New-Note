@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="New_Note.Pages.ProfilePage"
+             BackgroundColor="#272727"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid ColumnDefinitions="*,auto" HeightRequest="55" Margin="20,50,20,0">
+                <Label Text="Parvez Ali" FontFamily="PReg" TextColor="White" FontSize="30"
+                       VerticalTextAlignment="Center"/>
+
+                <!--Profile-->
+                <Frame Grid.Column="2" HorizontalOptions="End" Padding="0" WidthRequest="55"
+                       Style="{StaticResource ButtonFrame}" Margin="5,0" CornerRadius="55" BackgroundColor="Green">
+                    <Label Text="PA" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Frame>
+            </Grid>
+
+            <!--Email-->
+            <Label Text="Email" TextColor="White" FontSize="15" Margin="20,50,20,0"/>
+            <Label Text="pa7407071463@gmail.com" TextColor="White" Margin="20,0" FontFamily="PReg" FontSize="22"/>
+
+            <!--Phone-->
+            <Label Text="Phone" TextColor="White" FontSize="15" Margin="20,20,20,0"/>
+            <Label Text="700 187 1130" TextColor="White" Margin="20,0" FontFamily="PReg" FontSize="22"/>
+            
+            <!--Note Saved-->
+            <Grid ColumnDefinitions="auto,auto" Margin="20,50">
+            <Label Text="Notes saved:" TextColor="White" FontFamily="PReg" FontSize="20" VerticalOptions="Center"/>
+                <Label Text="07" Grid.Column="1" TextColor="White" FontFamily="PReg" FontSize="30" VerticalOptions="Center" Margin="20,0"/>
+            </Grid>
+
+
+            <!--Profile-->
+            <Frame Padding="0" Margin="30" CornerRadius="5" VerticalOptions="EndAndExpand">
+                <Label Text="Logout" FontSize="20" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="logout"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
