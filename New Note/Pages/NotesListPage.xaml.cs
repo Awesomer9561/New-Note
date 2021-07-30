@@ -59,7 +59,7 @@ namespace New_Note.Pages
 
         private void search(object sender, EventArgs e)
         {
-
+            Navigation.PushAsync(new Pages.SearchNotePage());
         }
 
         private void addNote(object sender, EventArgs e)

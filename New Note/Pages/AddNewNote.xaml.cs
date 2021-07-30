@@ -43,7 +43,7 @@ namespace New_Note.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //TitleEntry.Focus();
+            TitleEntry.Focus();
 
         }
         readonly Random r = new Random();

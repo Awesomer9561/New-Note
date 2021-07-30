@@ -87,7 +87,7 @@
                 </CollectionView>
 
                 <ImageButton Source="add" BackgroundColor="Transparent" HeightRequest="20"
-            AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95,.97,50,50" 
+            AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95,.92,60,60" 
             Clicked="addNote"/>
             </AbsoluteLayout>
             
