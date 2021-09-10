@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="New_Note.Pages.AddNewNote" 
              NavigationPage.HasNavigationBar="False"
+             xmlns:viewmodel="clr-namespace:New_Note.ViewModel"
              BackgroundColor="	#272727"
              xmlns:custom="clr-namespace:New_Note.Misc">
+
+    <ContentPage.BindingContext>
+        <viewmodel:AddNotesPageViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
             <Grid RowDefinitions="50" 
@@ -24,7 +30,7 @@
                     <Label Text="Save" FontSize="25" TextColor="White" Margin="0,5,0,0"
                            HorizontalOptions="Center" VerticalOptions="Center" FontFamily="PReg"/>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="saveNote"/>
+                        <TapGestureRecognizer Command="{Binding SaveNote}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
             </Grid>
@@ -33,11 +39,11 @@
                 <!--Title-->
                 <custom:MyEntry FontSize="40" Placeholder="Title" Margin="0,30" x:Name="TitleEntry"
                        PlaceholderColor="#636e72" TextColor="WhiteSmoke" Completed="titleCompleted"
-                       FontFamily="PMed" CharacterSpacing="0.5"/>
+                       FontFamily="PMed" CharacterSpacing="0.5" Text="{Binding Title}"/>
 
                 <!--Note-->
                 <custom:MyEditor Placeholder="Type something..." FontSize="20" AutoSize="TextChanges"
-                                 x:Name="NoteEditor"
+                                 x:Name="NoteEditor" Text="{Binding Note}"
                     FontFamily="PReg" PlaceholderColor="#636e72" TextColor="WhiteSmoke"/>
 
             </StackLayout>

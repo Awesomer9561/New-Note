@@ -1,9 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodel="clr-namespace:New_Note.ViewModel"
              x:Class="New_Note.Pages.NotesListPage"
              BackgroundColor="#272727"
              NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.BindingContext>
+        <viewmodel:NotesListPageViewModel/>
+    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <Style TargetType="Grid">
@@ -16,7 +21,7 @@
                                         Value="Transparent" />
                             </VisualState.Setters>
                         </VisualState>
-                        
+
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
@@ -28,7 +33,6 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-
 
     <ContentPage.Content>
         <StackLayout>
@@ -57,8 +61,9 @@
 
             </Grid>
             <AbsoluteLayout>
-                <CollectionView x:Name="noteCollectionView" Margin="15,05,15,0"
-                            ItemSizingStrategy="MeasureAllItems" SelectionMode="Single" SelectionChanged="noteSelected">
+                <CollectionView x:Name="noteCollectionView" Margin="15,05,15,10" ItemsSource="{Binding NoteItem}" 
+                                SelectedItem="{Binding SelectedNote}" SelectionChangedCommand="{Binding NoteSelectionChanged}"
+                            ItemSizingStrategy="MeasureAllItems" SelectionMode="Single" >
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2"  
                                      VerticalItemSpacing="15"/>
@@ -98,7 +103,10 @@
 
                 <ImageButton Source="add" BackgroundColor="Transparent" HeightRequest="20"
             AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".95,.92,60,60" 
-            Clicked="addNote"/>
+            Command="{Binding AddNote}"/>
+                <ImageButton Source="sync" BackgroundColor="Transparent" HeightRequest="20"
+            AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".05,.92,60,60" 
+            Command="{Binding SyncNote}"/>
             </AbsoluteLayout>
             
         </StackLayout>

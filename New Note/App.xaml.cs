@@ -6,14 +6,14 @@ namespace New_Note
 {
     public partial class App : Application
     {
-        public static Database database;
-        public static Database DatabaseLayer
+        public static LocalDatabase database;
+        public static LocalDatabase DatabaseLayer
         {
             get
             {
                 if (database == null)
                 {
-                    database = new Database();
+                    database = new LocalDatabase();
                 }
                 return database;
             }
@@ -24,10 +24,14 @@ namespace New_Note
             InitializeComponent();
 
             DatabaseLayer.Createtable();
-            //MainPage = new NavigationPage(new Pages.NotesListPage());
-            //MainPage = new NavigationPage(new Pages.ProfilePageNew());
-            MainPage = new NavigationPage(new Pages.LoginPages.LoginPage());
+            //string UserUID = "";
+
+            MainPage = new NavigationPage(new Pages.NotesListPage());
+            //MainPage = new NavigationPage(new Pages.ProfilePage());
+            //MainPage = new NavigationPage(new Pages.LoginPages.LoginPage());
+            //MainPage = new NavigationPage(new Pages.LoginPages.SignUpPage());
             //MainPage = new NavigationPage(new Pages.SearchNotePage());
+            //MainPage = new NavigationPage(new Pages.AddNewNote());
             //MainPage = new NavigationPage(new Misc.DisplayAlertPopup());
         }
 

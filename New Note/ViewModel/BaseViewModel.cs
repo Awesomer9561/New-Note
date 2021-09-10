@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace New_Note.ViewModel
 {
-    class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChange(string propertyName)
@@ -16,5 +13,7 @@ namespace New_Note.ViewModel
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        
     }
 }

@@ -1,13 +1,14 @@
-﻿using SQLite;
+﻿using New_Note.Misc;
+using New_Note.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace New_Note
 {
-    public class Database
+    public class LocalDatabase
     {
         static Lazy<SQLiteAsyncConnection> lazy = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -20,20 +21,21 @@ namespace New_Note
         //Create table
         public void Createtable()
         {
-            if (!SQLiteAsync.TableMappings.Any(m => m.TableName == typeof(Table2).Name))
+            
+            if (!SQLiteAsync.TableMappings.Any(m => m.TableName == typeof(NotesModel).Name))
             {
-                SQLiteAsync.CreateTableAsync<Table2>();
+                SQLiteAsync.CreateTableAsync<NotesModel>();
             }
         }
 
         //Read table
-        public Task<List<Table2>> ReadNote()
+        public Task<List<NotesModel>> ReadNote()
         {
-            return SQLiteAsync.Table<Table2>().ToListAsync();
+            return SQLiteAsync.Table<NotesModel>().ToListAsync();
         }
 
         //Update/Save table
-        public void SaveNote(Table2 note)
+        public void SaveNote(NotesModel note)
         {
             if (note.ID == 0)
                 SQLiteAsync.InsertAsync(note);
@@ -42,32 +44,9 @@ namespace New_Note
         }
 
         //Delete note
-        public void DeleteNote(Table2 note)
+        public void DeleteNote(NotesModel note)
         {
             SQLiteAsync.DeleteAsync(note);
         }
     }
-
-    //Constants class
-    public static class Constants
-    {
-        public const string DatabaseFilename = "NoteDB.db3";
-        public const SQLite.SQLiteOpenFlags Flags =
-       // open the database in read/write mode
-       SQLite.SQLiteOpenFlags.ReadWrite |
-       // create the database if it doesn't exist
-       SQLite.SQLiteOpenFlags.Create |
-       // enable multi-threaded database access
-       SQLite.SQLiteOpenFlags.SharedCache;
-
-        public static string DBPath
-        {
-            get
-            {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                return Path.Combine(basePath, DatabaseFilename);
-            }
-        }
-    }
-
 }

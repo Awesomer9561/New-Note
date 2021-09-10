@@ -1,4 +1,5 @@
-﻿using System;
+﻿using New_Note.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,13 +12,13 @@ namespace New_Note.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchNotePage : ContentPage
     {
-        List<Table2> notes = App.DatabaseLayer.ReadNote().Result;
-        ObservableCollection<Table2> notesCollection { get; set; }
+        List<NotesModel> notes = App.DatabaseLayer.ReadNote().Result;
+        ObservableCollection<NotesModel> notesCollection { get; set; }
 
         public SearchNotePage()
         {
             InitializeComponent();
-            notesCollection = new ObservableCollection<Table2>(notes);
+            notesCollection = new ObservableCollection<NotesModel>(notes);
             suggestionsListView.ItemsSource = notesCollection;
         }
 
@@ -36,7 +37,7 @@ namespace New_Note.Pages
 
             suggestionsListView.ItemsSource = noteItem;
         }
-        public void GotoNote(Table2 note)
+        public void GotoNote(NotesModel note)
         {
             if (note != null)
             {
@@ -47,14 +48,14 @@ namespace New_Note.Pages
         private void suggestionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var prev = e.PreviousSelection;
-            var curr = e.CurrentSelection as Table2;
+            var curr = e.CurrentSelection as NotesModel;
             GotoNote(curr);
         }
 
         private void noteSelected(object sender, SelectionChangedEventArgs e)
         {
             var prev = e.PreviousSelection;
-            var curr = e.CurrentSelection.FirstOrDefault() as Table2;
+            var curr = e.CurrentSelection.FirstOrDefault() as NotesModel;
             GotoNote(curr);
         }
 

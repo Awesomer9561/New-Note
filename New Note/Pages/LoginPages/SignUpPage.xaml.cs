@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace New_Note.Pages
+namespace New_Note.Pages.LoginPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePageNew : ContentPage
+    public partial class SignUpPage : ContentPage
     {
-        public ProfilePageNew()
+        public SignUpPage()
         {
             InitializeComponent();
-        }
-
-        private void logout(object sender, EventArgs e)
-        {
-            App.Current.MainPage = new Pages.LoginPages.LoginPage();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using New_Note.Models;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,24 +9,23 @@ namespace New_Note.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewNote : ContentPage
     {
-        Table2 note2 = new Table2();
-        Table2 note1 = new Table2();
-        public ViewNote(Table2 note)
+        NotesModel noteItem = new NotesModel();
+        public ViewNote(NotesModel note)
         {
             InitializeComponent();
-            note1 = note;
-            note2 = note;
+            noteItem = note;
 
             OnAppearing();
+            
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
             
-            NoteViewLabel.Text = note1.NoteItem;
-            TitleViewLabel.Text = note1.Title;
-            TimeStampLabel.Text = note1.TimeStamp;
-            colorBox.BackgroundColor = Color.FromHex(note1.NoteColor);
+            NoteViewLabel.Text = noteItem.NoteItem;
+            TitleViewLabel.Text = noteItem.Title;
+            TimeStampLabel.Text = noteItem.TimeStamp;
+            colorBox.BackgroundColor = Color.FromHex(noteItem.NoteColor);
         }
 
         private void back(object sender, EventArgs e)
@@ -35,14 +35,14 @@ namespace New_Note.Pages
 
         private void deleteNote(object sender, EventArgs e)
         {
-            App.DatabaseLayer.DeleteNote(note2);
+            App.DatabaseLayer.DeleteNote(noteItem);
             Navigation.PopAsync();
         }
 
         
         private void editNote(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new EditNotePage(note2));
+            Navigation.PushAsync(new EditNotePage(noteItem));
         }
     }
 }

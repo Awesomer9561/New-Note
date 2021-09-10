@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="New_Note.Pages.LoginPages.LoginPage"
              NavigationPage.HasNavigationBar="False"
-             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms" 
+             xmlns:viewmodel="clr-namespace:New_Note.ViewModel"
              BackgroundColor="#272727">
+
+    <ContentPage.BindingContext>
+        <viewmodel:LoginPageViewModel/>
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Login" FontSize="50" HorizontalOptions="Start" 
@@ -13,23 +19,23 @@
                 <StackLayout>
                     <inputLayout:SfTextInputLayout Hint="Email" OutlineCornerRadius="5" FocusedColor="Black"
                                                    UnfocusedStrokeWidth="2" FocusedStrokeWidth="2.5" ContainerType="Outlined" Margin="5">
-                        <Entry x:Name="email"/>
+                        <Entry x:Name="email" Text="{Binding Email, Mode=TwoWay}"/>
                     </inputLayout:SfTextInputLayout>
                     <inputLayout:SfTextInputLayout Hint="Password" OutlineCornerRadius="5" FocusedColor="Black"
                                                    UnfocusedStrokeWidth="2" FocusedStrokeWidth="2.5" ContainerType="Outlined" Margin="5">
-                        <Entry x:Name="password"/>
+                        <Entry x:Name="password" Text="{Binding Password, Mode=TwoWay}"/>
                     </inputLayout:SfTextInputLayout>
 
                     <Label Text="Forgot password?" TextColor="#272727" Margin="0,-15,0,0" HorizontalOptions="End">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="forgotpassword"/>
+                            <TapGestureRecognizer Command="{Binding ForgotPassword}"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
             </Frame>
             <Label Text="Sign Up" TextColor="White" FontSize="17" HorizontalTextAlignment="Center">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="signup"/>
+                    <TapGestureRecognizer Command="{Binding SignUp}"/>
                 </Label.GestureRecognizers>
             </Label>
 
@@ -40,7 +46,7 @@
                        TextColor="#272727" VerticalOptions="CenterAndExpand" Margin="0,5,20,0"/>
                 </Grid>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="googleLogin"/>
+                    <TapGestureRecognizer Command="{Binding GoogleLogin}"/>
                 </Frame.GestureRecognizers>
             </Frame>
             
@@ -49,7 +55,7 @@
                        VerticalOptions="CenterAndExpand"
                        TextColor="#272727"/>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="login"/>
+                    <TapGestureRecognizer Command="{Binding Login}"/>
                 </Frame.GestureRecognizers>
             </Frame>
         </StackLayout>

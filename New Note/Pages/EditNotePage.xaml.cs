@@ -1,4 +1,5 @@
-﻿using System;
+﻿using New_Note.Models;
+using System;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,8 +9,8 @@ namespace New_Note.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditNotePage : ContentPage
     {
-        int id;
-        public EditNotePage(Table2 note)
+        readonly int id;
+        public EditNotePage(NotesModel note)
         {
             InitializeComponent();
             id = note.ID;
@@ -26,7 +27,7 @@ namespace New_Note.Pages
 
         private async void saveNote(object sender, EventArgs e)
         {
-            Table2 note = new Table2();
+            NotesModel note = new NotesModel();
             note.ID = id;
             note.NoteItem = NoteViewLabel.Text;
             note.Title = TitleViewLabel.Text;
