@@ -55,7 +55,7 @@
                        Style="{StaticResource ButtonFrame}" Margin="5,0" CornerRadius="55" BackgroundColor="Green">
                     <Label Text="PA" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="profile"/>
+                        <TapGestureRecognizer Command="{Binding GotoProfile}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
 

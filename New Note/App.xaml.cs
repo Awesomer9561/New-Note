@@ -24,8 +24,8 @@ namespace New_Note
             InitializeComponent();
 
             DatabaseLayer.Createtable();
-            //string UserUID = "";
 
+            //MainPage = new NavigationPage(new Misc.DisplayAlertPopup());
             MainPage = new NavigationPage(new Pages.NotesListPage());
             //MainPage = new NavigationPage(new Pages.ProfilePage());
             //MainPage = new NavigationPage(new Pages.LoginPages.LoginPage());

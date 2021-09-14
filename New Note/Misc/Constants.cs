@@ -1,4 +1,6 @@
-﻿using System;
+﻿using New_Note.Models;
+using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -7,8 +9,26 @@ namespace New_Note.Misc
 {
     public class Constants
     {
-        public static bool IsLoggedIn { get; set; }
+        public static bool IsLoggedIn
+        {
+            get => Preferences.Get("IsLoggedIn", false);
+            set { IsLoggedIn = value; }
+        }
         public static string NotesCount { get; set; }
+
+        public static UserModel User
+        {
+            get
+            {
+                var user = Preferences.Get("User", null);
+                if (user != null)
+                {
+                    return JsonConvert.DeserializeObject(user) as UserModel;
+                }
+                return null;
+            }
+            set { User = value; }
+        }
 
         public static string FirebaseDatabaseURL = "https://notes-84ec0-default-rtdb.firebaseio.com/";
         public static string WebApiKey = "AIzaSyCpA3ZyO-eUorPIpcXb0PxGVeJLquVscSA";

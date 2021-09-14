@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using New_Note.Misc;
+using Rg.Plugins.Popup.Services;
+using System.ComponentModel;
 
 namespace New_Note.ViewModel
 {
@@ -13,7 +15,13 @@ namespace New_Note.ViewModel
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        
+        public void DisplayPrompt(string title, string content)
+        {
+            PopupNavigation.PushAsync(new DisplayPromptPopup(title, content));
+        }
+        public void DisplayAlert(string title, string content)
+        {
+            PopupNavigation.PushAsync(new DisplayAlertPopup(title, content));
+        }
     }
 }

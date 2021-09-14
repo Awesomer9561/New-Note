@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Firebase.Auth;
 using Firebase.Database;
@@ -72,33 +74,51 @@ namespace New_Note.ViewModel
 
                     if (auth !=null)
                     {
-                        Constants.IsLoggedIn = true;
-                        //Preferences.Set("Usermail", result.Object.Email);
-
+                        Preferences.Set("IsLoggedIn", true);
+                        Preferences.Set("Usermail", auth.User.Email);
                         //Getting notes count value
-                        CheckFirebaseDatabase();
+
+                        CheckFirebaseforUserInfo(auth.User.Email);
+                        App.Current.MainPage.Navigation.PushAsync(new Pages.NotesListPage());
                     }
                     else
                     {
-                        await App.Current.MainPage.DisplayAlert("Error", "Invalid email or password", "OK");
+                        DisplayAlert("Error", "Invalid email or password");
                     }
                    
                 }
                 catch (System.Exception)
                 {
-                    //var message = JsonConvert.DeserializeObject(ex.Message);
-                    //How to display just message
+                    DisplayAlert("Error", "Invalid email or password");
                 }
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("", "Invalid Email or Password!", "Ok");
+                DisplayAlert("", "Invalid Email or Password!");
             }
         }
 
-        private void CheckFirebaseDatabase()
+        private async void CheckFirebaseforUserInfo(string email)
         {
-           
+            FirebaseClient client = new FirebaseClient(Constants.FirebaseDatabaseURL);
+            var Users = await client.Child("Users").OnceAsync<UserModel>();
+
+            foreach (var item in Users)
+            {
+                if (item.Object.Email == email)
+                {
+                    var user = new UserModel
+                    {
+                        Email = item.Object.Email,
+                        Name = item.Object.Name,
+                        UID = item.Object.UID,
+                        Phone = item.Object.Phone,
+                        Password = item.Object.Password
+                    };
+                    Preferences.Set("User", JsonConvert.SerializeObject(user));
+                    return;
+                }
+            }
         }
     }
 }

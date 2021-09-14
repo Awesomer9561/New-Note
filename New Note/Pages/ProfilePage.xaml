@@ -4,6 +4,7 @@
              xmlns:viewmodel="clr-namespace:New_Note.ViewModel"
              x:Class="New_Note.Pages.ProfilePage"
              BackgroundColor="#272727"
+             xmlns:toolkit="http://xamarin.com/schemas/2020/toolkit"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
@@ -17,10 +18,12 @@
                        VerticalTextAlignment="Center"/>
 
                 <!--Profile-->
-                <Frame Grid.Column="2" HorizontalOptions="End" Padding="0" WidthRequest="55"
+                <!--<Frame Grid.Column="2" HorizontalOptions="End" Padding="0" WidthRequest="55"
                        Style="{StaticResource ButtonFrame}" Margin="5,0" CornerRadius="55" BackgroundColor="Green">
                     <Label Text="PA" FontSize="25" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                </Frame>
+                </Frame>-->
+                <toolkit:AvatarView HeightRequest="70" WidthRequest="70" Grid.Column="2" HorizontalOptions="End" Text="{Binding Initials}"
+                                    Margin="5,0" FontSize="25" TextColor="White" VerticalOptions="Center"/>
             </Grid>
 
             <!--Email-->

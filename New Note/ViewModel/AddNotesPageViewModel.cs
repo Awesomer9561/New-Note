@@ -1,20 +1,15 @@
 ﻿using Firebase.Database;
-using Firebase.Database.Query;
 using New_Note.Misc;
 using New_Note.Models;
 using System;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.Extensions;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace New_Note.ViewModel
 {
     public class AddNotesPageViewModel : BaseViewModel
     {
-        public Random r = new Random();
-        public FirebaseClient client = new FirebaseClient(Constants.FirebaseDatabaseURL);
-
         public ICommand SaveNote { get; }
         public string title;
         public string Title
@@ -48,6 +43,10 @@ namespace New_Note.ViewModel
             {
                 SaveNotewithEmail();
             }
+            else
+            {
+                DisplayAlert("Error", "Please enter values");
+            }
         }
 
         //Saving the note in local database
@@ -64,11 +63,11 @@ namespace New_Note.ViewModel
                     NoteColor = Color,
                     NoteItem = Note,
                     Title = Title,
-                    TimeStamp = Timestamp
+                    TimeStamp = Timestamp,
+                    IsSynced = false
                 };
 
                 App.DatabaseLayer.SaveNote(noteItem);
-                //client.Child("Notes").PostAsync(noteItem);
 
                 Application.Current.MainPage.DisplayToastAsync("Item Added Successfully");
                 App.Current.MainPage.Navigation.PopAsync();

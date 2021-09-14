@@ -2,6 +2,8 @@
 using Firebase.Database.Query;
 using New_Note.Misc;
 using New_Note.Models;
+using New_Note.Pages;
+using Rg.Plugins.Popup.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,7 +13,7 @@ using Xamarin.Forms;
 
 namespace New_Note.ViewModel
 {
-    class NotesListPageViewModel : BaseViewModel
+    public class NotesListPageViewModel : BaseViewModel
     {
         public NotesModel SelectedNote { get; set; }
         public ObservableCollection<NotesModel> noteItem;
@@ -27,21 +29,37 @@ namespace New_Note.ViewModel
         public ICommand AddNote { get; }
         public ICommand SyncNote { get; }
         public ICommand NoteSelectionChanged { get; }
+        public ICommand GotoProfile { get; }
         public NotesListPageViewModel()
         {
             AddNote = new Command(addnote);
             SyncNote = new Command(syncnote);
+            GotoProfile = new Command(gotoprofile);
             NoteSelectionChanged = new Command(selectionChanged);
 
             initData();
         }
 
+        private void gotoprofile(object obj)
+        {
+            if (Constants.IsLoggedIn)
+            {
+                App.Current.MainPage.Navigation.PushModalAsync(new ProfilePage());
+            }
+            else
+            {
+                DisplayPrompt("Login required!", "You need to login to unlock this feature");
+            }
+        }
+
         public async void initData()
         {
+
             var notedb = await App.DatabaseLayer.ReadNote();
             if (notedb != null)
             {
                 NoteItem = new ObservableCollection<NotesModel>(notedb);
+                Constants.NotesCount = NoteItem.Count.ToString();
             }
         }
 
@@ -60,33 +78,24 @@ namespace New_Note.ViewModel
 
         private async void syncnote(object obj)
         {
-            FirebaseClient client = new FirebaseClient(Constants.FirebaseDatabaseURL);
-            var results = await client.Child("Notes").OnceAsync<NotesModel>();
-            var UploadedNotes = results.Select(list => list.Object).Where(item => item.Email == Constants.email).ToList();
-
-            //notes that aren't synced
-            //noteitem is offline collection and uploaded notes is online collection
-
-            List<NotesModel> ToBeUploaded = new List<NotesModel>(noteItem);
-            if (UploadedNotes.Count > 0)
+            if (Preferences.Get("IsLoggedIn", false))
             {
-                foreach (var Uploaded in UploadedNotes)
-                {
-                    ToBeUploaded = ToBeUploaded.Select(item => item).Where(item => item.ID != Uploaded.ID).ToList();
-                }
+                FirebaseClient client = new FirebaseClient(Constants.FirebaseDatabaseURL);
+                
+                List<NotesModel> ToBeUploaded = new List<NotesModel>();
+                ToBeUploaded = noteItem.Select(item => item).Where(item => item.IsSynced == false).ToList();
                 foreach (var item in ToBeUploaded)
                 {
                     await client.Child("Notes").PostAsync(item);
+                    item.IsSynced = true;
+                    App.DatabaseLayer.SaveNote(item);
                 }
+                DisplayAlert("Sucess", $"Uploaded {ToBeUploaded.Count} notes");
             }
             else
             {
-                foreach (var item in noteItem)
-                {
-                    await client.Child("Notes").PostAsync(item);
-                }
+                PopupNavigation.PushAsync(new DisplayPromptPopup("Login Required!", "Please login to avail and use this feature"));
             }
-            await App.Current.MainPage.DisplayAlert("Success", $"Uploaded {ToBeUploaded.Count} notes", "Ok");
         }
 
 
@@ -100,7 +109,7 @@ namespace New_Note.ViewModel
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("", "Please provide permission", "Ok");
+                DisplayAlert("", "Please provide permissions");
                 addnote(null);
             }
         }

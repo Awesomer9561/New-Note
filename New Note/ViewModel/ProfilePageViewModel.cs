@@ -1,4 +1,10 @@
-﻿namespace New_Note.ViewModel
+﻿using New_Note.Misc;
+using System;
+using System.Windows.Input;
+using Xamarin.Essentials;
+using Xamarin.Forms;
+
+namespace New_Note.ViewModel
 {
     class ProfilePageViewModel : BaseViewModel
     {
@@ -12,26 +18,54 @@
                 OnPropertyChange("Email");
             }
         }
-        public string password;
-        public string Password
+        public string notesCount;
+        public string NotesCount
         {
-            get { return password; }
+            get { return notesCount; }
             set
             {
-                password = value;
-                OnPropertyChange("Password");
+                notesCount = value;
+                OnPropertyChange("NotesCount");
             }
         }
 
-        public string username;
-        public string Username
+        public string initials;
+        public string Initials
         {
-            get { return username; }
+            get { return initials; }
             set
             {
-                username = value;
-                OnPropertyChange("Username");
+                initials = value;
+                OnPropertyChange("Initials");
             }
+        }
+        public ICommand Logout { get; }
+        public ProfilePageViewModel()
+        {
+            setProfileInfo();
+            Logout = new Command(logout);
+        }
+
+        private void setProfileInfo()
+        {
+            NotesCount = Constants.NotesCount;
+            Email = Constants.User.Email;
+            string[] nameSplit = (Constants.User.Name).Trim().Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);
+            var initials = nameSplit[0].Substring(0, 1).ToUpper();
+
+            if (nameSplit.Length > 1)
+            {
+                initials += nameSplit[nameSplit.Length - 1].Substring(0, 1).ToUpper();
+            }
+
+            Initials = initials;
+        }
+
+        private void logout(object obj)
+        {
+            Preferences.Set("IsLoggedIn", false);
+            Constants.User = null;
+            App.Current.MainPage = new NavigationPage(new Pages.NotesListPage());
         }
     }
 }

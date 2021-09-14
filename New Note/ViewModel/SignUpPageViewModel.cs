@@ -3,6 +3,8 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using New_Note.Misc;
 using New_Note.Models;
+using New_Note.Pages;
+using Newtonsoft.Json;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -70,18 +72,24 @@ namespace New_Note.ViewModel
 
                 UserModel user = new UserModel()
                 {
+                    UID = auth.FirebaseToken,
                     Email = Email,
                     Password = Password,
                     Name = Username,
                     Phone = Phone,
                 };
                 var result = await client.Child("Users").PostAsync(user);
+
                 Preferences.Set("Usermail", result.Object.Email);
-                // await App.Current.MainPage.DisplayAlert("", result.Key, "Ok");
+                Preferences.Set("IsLoggedIn", true);
+                Preferences.Set("User", JsonConvert.SerializeObject(user));
+
+                DisplayAlert("Welcome", "Login successful");
+                App.Current.MainPage = new NavigationPage(new NotesListPage());
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                await App.Current.MainPage.DisplayAlert("", ex.Message, "Ok");
+                DisplayAlert("Error", "Please check your details");
             }
 
         }

@@ -1,10 +1,6 @@
 ﻿using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,25 +11,12 @@ namespace New_Note.Misc
     public partial class DisplayAlertPopup : PopupPage
     {
         bool j = true;
-        public DisplayAlertPopup(bool i)
+        public DisplayAlertPopup(string title, string content)
         {
             InitializeComponent();
-            if (i == false)
-            {
-                j = false;
-                titleLabel.Text = "Error";
-                contentLabel.Text = "Please write something";
-                okLabel.Text = "Ok";
-            }
-            else
-            {
-                titleLabel.Text = "Succcess";
-                contentLabel.Text = "Note added successfully";
-                okLabel.Text = "Ok";
-                PopupFrame.CloseWhenBackgroundIsClicked = true;
-
-                //PopupNavigation.PopAsync();
-            }
+            j = false;
+            titleLabel.Text = title;
+            contentLabel.Text = content;
         }
 
         private async void ErrorPopup(object sender, EventArgs e)

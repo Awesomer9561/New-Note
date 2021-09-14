@@ -13,6 +13,8 @@
             <Style TargetType="Label" x:Key="Popup">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="FontFamily" Value="PReg"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,2,0,0"/>
                 <Setter Property="TextColor" Value="#485460"/>
             </Style>
         </ResourceDictionary>

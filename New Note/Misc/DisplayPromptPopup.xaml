@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animation="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 Opacity="0.95"
+                 x:Class="New_Note.Misc.DisplayPromptPopup">
+    <popup:PopupPage.Animation>
+    <animation:ScaleAnimation   
+            PositionIn="Center"  
+            PositionOut="Center"  
+            ScaleIn="1.2"  
+            ScaleOut="0.8"  
+            DurationIn="100"  
+            DurationOut="100"  
+            EasingIn="SinOut"  
+            EasingOut="SinIn"  
+            HasBackgroundAnimation="False"/>
+        </popup:PopupPage.Animation>
+
+    <Frame BackgroundColor="AliceBlue" Padding="20,10" HeightRequest="150" WidthRequest="250"
+               HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="20" x:Name="Frame">
+        <StackLayout>
+            <Label x:Name="titleLabel" FontSize="24" Margin="0,10,0,0" FontFamily="PSemiBold" Style="{StaticResource Popup}"/>
+            <Label x:Name="contentLabel" Margin="0,-20,0,5" Style="{StaticResource Popup}" VerticalOptions="CenterAndExpand"/>
+            <Line X1="0" Y1="0" X2="300" Y2="0" Margin="-20,-20,-20,0" Stroke="black" StrokeThickness="2"/>
+            <Grid ColumnDefinitions="*,auto,*" HeightRequest="25">
+                <Frame Padding="0" Grid.Column="0" BackgroundColor="Transparent">
+                    <Label Text="Continue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Style="{StaticResource Popup}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="login"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Frame>
+                
+                <Line Grid.Column="1" X1="0" X2="0" Y1="0" Y2="50" VerticalOptions="Center" Stroke="Black" Margin="0,02,0,0" StrokeThickness="2"/>
+
+                <Frame Grid.Column="2" Padding="0" BackgroundColor="Transparent">
+                    <Label Text="Cancel" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Style="{StaticResource Popup}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="cancel"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </Frame>
+</popup:PopupPage>

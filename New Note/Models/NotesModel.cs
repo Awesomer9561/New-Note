@@ -13,6 +13,6 @@ namespace New_Note.Models
         public string TimeStamp { get; set; }
         public string NoteColor { get; set; }
         public string Email { get; set; }
-
+        public bool IsSynced { get; set; }
     }
 }
