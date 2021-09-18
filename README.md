@@ -1,3 +1,4 @@
-# New-Note
-Currently a protype of notes app
-Will be adding more features
+# Notes App
+Fully functional notes app with login and sync features
+Saves all your notes to local database.
+Also provides you an option to sync notes in firebase databse.
